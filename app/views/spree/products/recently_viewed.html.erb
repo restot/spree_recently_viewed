@@ -1,11 +1,23 @@
 <% if cached_recently_viewed_products.any? %>
   <div id="recently_viewed" data-hook>
     <h3 class="product-section-title"><%= Spree.t(:recently_viewed_products) %></h3>
-
-    <ul id="recently_viewed_products" class="list-group">
+      <% i = 1 %>
+    <div class="row" id="products"></div>
       <% cached_recently_viewed_products.each do |product| %>
-        <li class="list-group-item"><%= link_to product.name, product %></li>
+          <div id="product_<%= product.id %>" class="col-md-3 col-sm-6 col-xs-6 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
+            <div class="panel panel-default">
+              <div class="panel-body text-center product-body">
+                <%= link_to product, itemprop: "url" do %>
+                  <%= small_image(product, itemprop: "image") %><br/>
+                  <%= content_tag(:span, truncate(product.name, length: 35), class: 'info', itemprop: "name", title: product.name) %>
+                  <br/>
+                  </div>
+                <% end %>
+                </div>
+          </div>
+        <% i+=1 %>
+        <% break if i >= 5 %>
       <% end %>
-    </ul>
   </div>
 <% end %>
+
