@@ -2,7 +2,7 @@
   <div id="recently_viewed" data-hook>
     <div class="bigTitle"><%= Spree.t(:recently_viewed_products) %></div>
       <% i = 1 %>
-    <div class="row" id="products"></div>
+    <div class="row" id="products">
       <% cached_recently_viewed_products.each do |product| %>
           <div id="product_<%= product.id %>" class="col-md-3" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
             <div class="catalogBox">
@@ -18,6 +18,7 @@
         <% i+=1 %>
         <% break if i >= 5 %>
       <% end %>
+    </div>
   </div>
 <% end %>
 
