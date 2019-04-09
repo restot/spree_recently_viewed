@@ -1,19 +1,19 @@
 <% if cached_recently_viewed_products.any? %>
   <div id="recently_viewed" data-hook>
-    <h3 class="product-section-title"><%= Spree.t(:recently_viewed_products) %></h3>
+    <div class="bigTitle"><%= Spree.t(:recently_viewed_products) %></div>
       <% i = 1 %>
     <div class="row" id="products"></div>
       <% cached_recently_viewed_products.each do |product| %>
-          <div id="product_<%= product.id %>" class="col-md-3 col-sm-6 col-xs-6 product-list-item" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
-            <div class="panel panel-default">
-              <div class="panel-body text-center product-body">
+          <div id="product_<%= product.id %>" class="col-md-3" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
+            <div class="catalogBox">
+              <div class="goodTitle">
+                <span itemprop="name"><%= product.name %></span>
+              </div>
                 <%= link_to product, itemprop: "url" do %>
-                  <%= small_image(product, itemprop: "image") %><br/>
-                  <%= content_tag(:span, truncate(product.name, length: 35), class: 'info', itemprop: "name", title: product.name) %>
-                  <br/>
-                  </div>
-                <% end %>
+                <div class="goodPhoto" itemprop="image" content="<%=  (product.images.first.nil?)?  asset_path('noimage/small.png') : main_app.url_for(product.images.first.url(:small)) %>" style="background-image: url(<%=  (product.images.first.nil?)?  asset_path('noimage/small.png') : main_app.url_for(product.images.first.url(:small)) %>);">
                 </div>
+                <% end %>
+            </div>
           </div>
         <% i+=1 %>
         <% break if i >= 5 %>
