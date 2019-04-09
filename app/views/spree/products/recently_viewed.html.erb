@@ -6,7 +6,7 @@
       <% cached_recently_viewed_products.each do |product| %>
           <div id="product_<%= product.id %>" class="col-md-3" data-hook="products_list_item" itemscope itemtype="https://schema.org/Product">
             <div class="catalogBox">
-              <div class="goodTitle">
+              <div class="goodTitle grayTitle">
                 <span itemprop="name"><%= product.name %></span>
               </div>
                 <%= link_to product, itemprop: "url" do %>
